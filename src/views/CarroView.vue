@@ -6,12 +6,16 @@
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
-                <th>Placa</th>
+                <th>Ano Fabricação</th>
+                <th>Ano Modelo</th>
+                <th>Preco</th>
             </tr>
             <tr v-for="c in carros" :key="c.id">
                 <td>{{ c.id }}</td>
                 <td>{{ c.nome }}</td>
-                <td>{{ c.placa }}</td>
+                <td>{{ c.anoFabricacao }}</td>
+                <td>{{ c.anoModelo }}</td>
+                <td>{{ c.preco }}</td>
                 <td> <a href="javascript:void(0)" @click="editar(c)">Editar</a></td>
             </tr>
         </table>
