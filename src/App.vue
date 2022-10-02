@@ -2,8 +2,9 @@
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> | 
-    <router-link to="/Marca">marcas</router-link> |
-    <router-link to="/Carro">Carros</router-link> 
+    <router-link to="/Marca">Marcas</router-link> |
+    <router-link to="/Carro">Carros</router-link> |
+    <router-link to="/Cor">Cores</router-link> 
     
   </nav>
   <router-view/>

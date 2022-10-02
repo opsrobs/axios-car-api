@@ -32,6 +32,18 @@ const routes = [
     component: () => import('../views/CarroView.vue')
   },
   {
+    path: '/Cor',
+    name: 'Cor',
+    
+    component: () => import('../views/CorView.vue')
+  },
+  {
+    path: '/cor-form/:id',
+    name: 'cor-form',
+    
+    component: () => import('../views/CorView.vue')
+  },
+  {
     path: '/carro-form/:id',
     name: 'carro-form',
     
