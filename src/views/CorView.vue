@@ -5,8 +5,9 @@
         <table>
             <tr>
                 <th>Id</th>
-                <th>Nome</th>
-                <th>Placa</th>
+                <th>Cor</th>
+                <th>RGB</th>
+                <th>Status</th>
             </tr>
             <tr v-for="c in cores" :key="c.id">
                 <td>{{ c.id }}</td>
