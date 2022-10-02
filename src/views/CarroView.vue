@@ -19,24 +19,20 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     data(){
         return {
             //https://carros-app-example.herokuapp.com/carro
-            carros: [
-                {
-                    id: 0,
-                    nome: 'hb20',
-                    placa:'xpt-0123'
-                },
-                {
-                    id: 1,
-                    nome: 'fusion',
-                    placa:'xyz-9375'
-                }
-            ]
+            carros: []
         }
 
+    },
+    mounted() {
+        axios
+            .get('https://carros-app-example.herokuapp.com/carro')
+            .then(resp => this.carros = resp.data)
     },
     methods: {
         editar(carro){
