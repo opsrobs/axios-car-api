@@ -17,6 +17,8 @@
                 <td>{{ c.anoModelo }}</td>
                 <td>{{ c.preco }}</td>
                 <td> <a href="javascript:void(0)" @click="editar(c)">Editar</a></td>
+                <td> <a href="javascript:void(0)" @click="excluir(c)">Excluir</a></td>
+
             </tr>
         </table>
     </div>
@@ -26,7 +28,7 @@
 import axios from 'axios';
 
 export default {
-    data(){
+    data() {
         return {
             //https://carros-app-example.herokuapp.com/carro
             carros: []
@@ -38,10 +40,23 @@ export default {
             .get('https://carros-app-example.herokuapp.com/carro')
             .then(resp => this.carros = resp.data)
     },
+    
     methods: {
-        editar(carro){
-            this.$router.push(`/carro-form/${carro.id}`)
+        editar(carros) {
+            this.$router.push(`/carro-form/${carros.id}`)
 
+        },excluir(carros) {
+            const id = carros.id
+            axios
+            .delete(`https://carros-app-example.herokuapp.com/carro/${id}`)
+            .then(this.load())
+            .catch(error => alert(error))
+        },
+        load(){
+            axios.get()
+            .then( resp => {
+                this.carros = resp.data
+            })
         }
     }
 
