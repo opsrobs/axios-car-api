@@ -12,7 +12,7 @@
             <tr v-for="c in cores" :key="c.id">
                 <td>{{ c.id }}</td>
                 <td>{{ c.nome }}</td>
-                <td>{{ c.rgb }}</td>
+                <td id="cor" :style="{'background-color': c.rgb, 'font-size': '14px' }">{{  }}</td>
                 <td>{{ c.ativo }}</td>
                 <td> <a href="javascript:void(0)" @click="editar(c)">Editar</a></td>
             </tr>
@@ -45,3 +45,6 @@ export default {
 
 }
 </script>
+
+<style>
+</style>

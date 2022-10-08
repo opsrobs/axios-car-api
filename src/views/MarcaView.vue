@@ -1,13 +1,8 @@
 <template>
     <div>
-        <h1>
-            Marca
+        <h1 class="title-brand">
+            Marcas
         </h1>
-        <button @click="novo()">Novo</button>
-
-
-
-
         <table class="table">
             <thead>
                 <tr>
@@ -30,6 +25,9 @@
                 </tr>
             </tbody>
         </table>
+        <div class="col-lg-12" >
+            <button type="button" @click="novo()" class="btn btn-outline-primary">Nova marca</button>
+        </div>
     </div>
 
 
@@ -113,6 +111,8 @@ export default {
                 message: `Você deseja deletar ${marca.nome}?`,
                 header: 'Confirmar exclusão!!!',
                 icon: 'pi pi-exclamation-triangle',
+                acceptLabel:'Sim',
+                rejectLabel: 'Não',
                 accept: () => {
                     this.excluir(marca)
                     this.$confirm.close();
@@ -139,3 +139,19 @@ export default {
 
 }
 </script>
+
+<style>
+.col-lg-12 {
+    text-align: right;
+    padding: 10px;
+    margin-right: 20px;
+}
+.title-brand{
+    margin-top: 15px;
+    margin-bottom: 25px;
+
+    font-family: 'Bitter', serif;
+    font-size: 40px;
+    font-weight: bold;
+}
+</style>
