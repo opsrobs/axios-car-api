@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import PrimeVue from 'primevue/config'
+import TabMenu from 'primevue/tabmenu';
+
 import ConfirmationService from 'primevue/confirmationservice'
 
 
@@ -13,6 +15,7 @@ import 'primeicons/primeicons.css'       //icons
 
 const apps = createApp(App)
 apps.use(router)
+apps.use(TabMenu)
 apps.use(ConfirmationService)
 
 

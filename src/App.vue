@@ -1,20 +1,25 @@
 <template>
-
-
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/Marca">Marcas</router-link> |
-    <router-link to="/Carro">Carros</router-link> |
-    <router-link to="/Cor">Cores</router-link>
-
-  </nav>
+  <TabMenu :model="items" />
   <router-view />
 </template>
 <script>
+import TabMenu from 'primevue/tabmenu'
 
 export default({
-  
+  data(){
+    return {
+      items: [
+                {label: 'Home', icon: 'pi pi-fw pi-home', to: '/'},
+                {label: 'About', icon: 'pi pi-fw pi-calendar', to: '/about'},
+                {label: 'Marcas', icon: 'pi pi-fw pi-pencil', to:'/Marca'},
+                {label: 'Carros', icon: 'pi pi-fw pi-file', to:'/Carro'},
+                {label: 'Cores', icon: 'pi pi-fw pi-cog', to:'/Cor'}
+            ]
+  }
+},
+components: {
+    TabMenu 
+  }
 })
 </script>
 

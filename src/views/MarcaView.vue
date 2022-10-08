@@ -5,24 +5,30 @@
         </h1>
         <button @click="novo()">Novo</button>
 
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Nome</th>
-            </tr>
-            <tr v-for="m in marcas" :key="m.id">
-                <td>{{ m.id }}</td>
-                <td>{{ m.nome }}</td>
 
-                <td @click="id_marca = m">
-                    <ConfirmDialog @click="messageDialog(m)"></ConfirmDialog>
 
-                    <SplitButton 
-                     label="Novo" icon="pi pi-plus" 
-                     :model="items" href="javascript:void(0)">
-                    </SplitButton>
-                </td>
-            </tr>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Iendificador</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Opção</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="m in marcas" :key="m.id">
+                    <td>{{ m.id }}</td>
+                    <td>{{ m.nome }}</td>
+                    <td @click="id_marca = m">
+
+                        <ConfirmDialog @click="messageDialog(m)"></ConfirmDialog>
+
+                        <SplitButton label="Novo" icon="pi pi-plus" :model="items" href="javascript:void(0)">
+                        </SplitButton>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 
@@ -99,13 +105,13 @@ export default {
                 .then(resp => {
                     this.marcas = resp.data
                 })
-                window.location.reload();
+            window.location.reload();
 
         },
         messageDialog(marca) {
             this.$confirm.require({
                 message: `Você deseja deletar ${marca.nome}?`,
-                header:'Confirmar exclusão!!!',
+                header: 'Confirmar exclusão!!!',
                 icon: 'pi pi-exclamation-triangle',
                 accept: () => {
                     this.excluir(marca)
