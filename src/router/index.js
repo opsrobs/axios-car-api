@@ -26,6 +26,11 @@ const routes = [
     component: () => import('../views/MarcaFormView.vue')
   },
   {
+    path: '/Marca-form',
+    name: 'Marca-form-new',
+    component: () => import('../views/MarcaFormView.vue')
+  },
+  {
     path: '/Carro',
     name: 'Carro',
     
