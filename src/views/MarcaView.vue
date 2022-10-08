@@ -13,9 +13,8 @@
             <tr v-for="m in marcas" :key="m.id">
                 <td>{{ m.id }}</td>
                 <td>{{ m.nome }}</td>
-                <SplitButton label="BALA DA GIULIA" icon="pi pi-plus" :model="items"></SplitButton>
-                <td> <a href="javascript:void(0)" @click="editar(m)">Editar</a></td>
-                <td> <a href="javascript:void(0)" @click="excluir(m)">Excluir</a></td>
+                
+                <td @click="id_marca = m"> <SplitButton label="Novo" icon="pi pi-plus" :model="items" href="javascript:void(0)"></SplitButton></td>
             </tr>
         </table>
     </div>
@@ -32,11 +31,13 @@ export default {
     data() {
         return {
             marcas: [],
+            id_marca:0,
             items: [
 				{
-					label: 'Update',
+					label: 'Editar',
 					icon: 'pi pi-refresh',
 					command: () => {
+                        this.editar(this.id_marca)
 						this.$toast.add({severity:'success', summary:'Updated', detail:'Data Updated', life: 3000});
 					}
 				},
@@ -44,6 +45,7 @@ export default {
 					label: 'Delete',
 					icon: 'pi pi-times',
 					command: () => {
+                        this.excluir(this.id_marca)
 						this.$toast.add({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000});
 					}
 				},
@@ -65,10 +67,14 @@ export default {
     },
     methods: {
         editar(marca) {
+            if (this.id_marca == 0 || this.id_marca == null){
+                return
+            }
             this.$router.push(`/Marca-form/${marca.id}`)
 
         },
         novo() {
+            this.id_marca = null
             this.$router.push('/Marca-form/')
         },
         excluir(marca) {

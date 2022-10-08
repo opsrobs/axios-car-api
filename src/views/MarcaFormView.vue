@@ -1,15 +1,15 @@
 <template>
     <div>
+        <h1>Marcas</h1>
         <form @submit.prevent="salvar()">
             <span v-if="mensagem">{{mensagem}}<br /></span>
             <label for="nome">Nome:</label>
             <input type="text" size="40" required v-model="marca.nome" />
             <br />
             <input type="submit" value="Salvar" />
+            <br/>
             <a href="javascript:void(0)" @click="voltar()">Voltar</a>
-            <p> {{ $route.params.id }}</p>
             <br />
-            <p><button @click="voltar()">Voltar</button></p>
 
         </form>
     </div>
@@ -38,7 +38,12 @@ export default {
                     this.$router.push("/marca")
                 })
         }
-        console.log(this.$route.params.id);
+        else {
+        this.marca = {
+          id:null,
+          nome: ''
+        }
+      }
     },
     methods: {
         voltar() {
