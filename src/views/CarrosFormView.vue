@@ -17,13 +17,13 @@
                     <br />
                     <br />
                     <span class="p-float-label">
-                        <InputText id="data" type="number" size="20" required v-model="carro.anoFabricacao" />
+                        <InputText id="anoFabricacao" type="number" size="20" required v-model="carro.anoFabricacao" />
                         <label for="username">Ano de Fabricação</label>
                     </span>
                     <br />
                     <br />
                     <span class="p-float-label">
-                        <InputText id="data" type="number" size="20" required v-model="carro.anoModelo" />
+                        <InputText id="anoModelo" type="number" size="20" required v-model="carro.anoModelo" />
                         <label for="username">Ano modelo</label>
                     </span>
                     <br />
@@ -83,8 +83,7 @@ export default {
                 .catch(error => {
                     alert(error)
                     this.$router.push("/carro")
-                }),
-                this.$toast.add({ severity: 'success', summary: 'Success Message', detail: 'Order submitted', life: 3000 });
+                })
 
         }
         console.log(this.$route.params.id);
@@ -97,17 +96,21 @@ export default {
             axios.post('https://carros-app-example.herokuapp.com/carro/',
                 this.carro)
                 .then(() => this.mensagem = 'Registro gravado')
-                .catch(error => this.mensagem`Problema na gravação ${error}`)
-
-                this.$toast.add({severity:'success', summary: 'Default Message'})
+                .catch(error => this.mensagem = `Problema na gravação ${error}`)
+                this.clear()
+                return this.mensagem == 'Registro gravado'
+                ? this.$toast.add({severity:'error', summary: 'Problema na gravação'})
+                : this.$toast.add({severity:'success', summary: 'Registro gravado'})
+            
 
         },
-        teste() {
-            this.$bvToast.toast(`teste teste`, {
-                title: 'oloco',
-                autoHideDelay: 5000
-            })
-        }
+        // clear(){
+        //     nome='',
+        //     anoFabricacao='',
+        //     anoModelo='',
+        //     preco=''
+
+        // }
 
     },
     components: {

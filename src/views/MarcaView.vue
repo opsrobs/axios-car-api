@@ -21,6 +21,7 @@
 
                         <SplitButton label="Novo" @click="novo()" icon="pi pi-plus" :model="items"
                             href="javascript:void(0)">
+                            <Toast />
                         </SplitButton>
                     </td>
                 </tr>
@@ -38,23 +39,20 @@
 <script>
 import axios from 'axios';
 import SplitButton from 'primevue/splitbutton'
-import ConfirmDialog from 'primevue/confirmdialog';
-import { useToast } from "primevue/usetoast";
+import ConfirmDialog from 'primevue/confirmdialog'
+import Toast from 'primevue/toast';
+
 
 
 
 
 
 export default {
-    setup() {
-        const toast = useToast();
-        toast.add({severity:'info', summary: 'Info Message', detail:'Message Content', life: 3000});
-    },
     data() {
         return {
             marcas: [],
             id_marca: 0,
-            
+
             items: [
                 {
                     label: 'Editar',
@@ -69,7 +67,7 @@ export default {
                     icon: 'pi pi-times',
                     command: () => {
                         this.messageDialog(this.id_marca)
-                        this.$toast.add({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+
 
                     }
                 },
@@ -109,15 +107,16 @@ export default {
                 .then(this.load())
                 .catch(error => alert(error))
 
-
         },
         load() {
             axios.get('https://carros-app-example.herokuapp.com/marca')
                 .then(resp => {
                     this.marcas = resp.data
                 })
+            this.$toast.add({ severity: 'warn', summary: 'Delete', detail: `deletado com sucesso`, life: 30 });
 
-             window.location.reload();
+            //window.location.reload();
+
 
         },
         messageDialog(marca) {
@@ -130,7 +129,6 @@ export default {
                 accept: () => {
                     this.excluir(marca)
                     this.$confirm.close();
-                    this.load()
                 },
                 reject: () => {
                     this.load()
@@ -148,7 +146,8 @@ export default {
     },
     components: {
         SplitButton,
-        ConfirmDialog
+        ConfirmDialog,
+        Toast
     }
 
 }

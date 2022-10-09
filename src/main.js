@@ -1,16 +1,14 @@
 import { createApp } from 'vue'
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
 import { useToast } from "primevue/usetoast";
 
 import App from './App.vue'
 import router from './router'
 import PrimeVue from 'primevue/config'
-import TabMenu from 'primevue/tabmenu';
-import ToastService from 'primevue/toastservice'
-
-
-
+import TabMenu from 'primevue/tabmenu'
 import ConfirmationService from 'primevue/confirmationservice'
+import ToastService from 'primevue/toastservice';
+
 
 
 
@@ -23,11 +21,9 @@ const apps = createApp(App)
 
 apps.use(router)
 apps.use(TabMenu)
-apps.use(ToastService)
 apps.use(ConfirmationService)
-
-
 apps.use(PrimeVue)
+apps.use(ToastService)
 apps.mount('#app')
 
 export default defineComponent({
@@ -36,3 +32,4 @@ export default defineComponent({
         toast.add({severity:'info', summary: 'Info Message', detail:'Message Content', life: 3000});
     }
 })
+
