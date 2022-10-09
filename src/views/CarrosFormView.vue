@@ -33,7 +33,8 @@
                     </span>
                     <br />
                     <br />
-                        <input class="p-button-text zoom" type="submit" value="Salvar" @click="validadeinsert(mensagem)">
+                        <input class="p-button-text zoom" type="submit"
+                         value="Salvar">
                     <Toast />
 
                 </div>
@@ -97,8 +98,8 @@ export default {
                 this.carro)
                 .then(() => this.mensagem = 'Registro gravado')
                 .catch(() => this.value = 1),
+            this.clear(),
                 this.$toast.add({ severity: 'success', summary: 'Registro gravado', life: 3000 })
-            this.clear()
         },
         clear() {
             this.nome = '',

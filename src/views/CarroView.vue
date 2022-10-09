@@ -36,7 +36,7 @@
         </table>
 
         <div class="col-lg-12">
-            <button type="button" @click="novo()" class="btn btn-outline-primary">Nova marca</button>
+            <button type="button" @click="novo()" class="btn btn-outline-primary">Novo Veiculo</button>
         </div>
     </div>
 </template>

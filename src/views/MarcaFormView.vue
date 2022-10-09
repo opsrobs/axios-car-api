@@ -1,18 +1,17 @@
 <template>
     <div>
+        <Toast />
         <h1>Marcas</h1>
         <form @submit.prevent="salvar()">
             <div class="first-class" id="first-id">
                 <div class="p-fluid grid">
-                    <span v-if="mensagem">{{mensagem}}<br /></span>
                     <span class="p-float-label">
                         <InputText id="nome" type="text" size="20" required v-model="marca.nome" />
                         <label for="username">Nome do Veiculo</label>
                     </span>
                     <br />
-                    <input type="submit" value="Salvar" />
+                    <input class="p-button-text zoom" type="submit" value="Salvar">
                     <br />
-                    <a href="javascript:void(0)" @click="voltar()">Voltar</a>
                     <br />
                 </div>
             </div>
@@ -25,6 +24,8 @@
 
 import axios from 'axios'
 import InputText from 'primevue/inputtext'
+import Toast from 'primevue/toast'
+
 
 export default {
     data() {
@@ -62,10 +63,14 @@ export default {
                 this.marca)
                 .then(() => this.mensagem = 'Registro gravado')
                 .catch(error => this.mensagem = `Problema na gravação ${error}`)
+                this.$toast.add({ severity: 'success', summary: 'Registro gravado', life: 3000 })
+
         }
     },
     components: {
-        InputText
+        InputText,
+        Toast
+
     }
 
 
@@ -73,11 +78,25 @@ export default {
 </script>
 
 <style>
-.first-class{
+
+.first-class {
     display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 30%;
-  border: solid 1px red
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%
+}
+
+.zoom {
+  background-color: rgb(45, 177, 230);
+  transition: transform .2s; 
+  width: 60%;
+  height: 30px;
+  border:none;
+  border-radius:20px;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 </style>
