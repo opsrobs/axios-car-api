@@ -1,37 +1,65 @@
 <template>
     <div>
-
+        <h1>
+            x
+            <Toast />
+        </h1>
+    </div>
+    <div>
         <form @submit.prevent="salvar()">
-            <span v-if="mensagem">{{mensagem}}<br /></span>
-            <label for="nome">Nome:</label>
-            <input type="text" size="40" required v-model="carro.nome" /><br/>
-            <label for="Ano_fabricacao">Ano de Fabricação:</label>
-            <input type="number" size="40" required v-model="carro.anoFabricacao" /><br/>
-            <label for="Ano_modelo">Ano do modelo:</label>
-            <input type="number" size="40" required v-model="carro.anoModelo" /><br/>
-            <label for="preco">Preço:</label>
-            <input type="number" size="40" required v-model="carro.preco" />
-            <br />
-            <br />
-            <input type="submit" value="Salvar" />
-            <a href="javascript:void(0)" @click="voltar()">Voltar</a>
-            <p> {{ $route.params.id }}</p>
-            <br />
-            <p><button @click="voltar()">Voltar</button></p>
-            <p><button @click="atualizar()">atualizar</button></p>
+            <div class="first-class" id="first-id">
+                <div class="p-fluid grid">
+                    <span v-if="mensagem">{{mensagem}}<br /></span>
+                    <span class="p-float-label">
+                        <InputText id="nome" type="text" size="20" required v-model="carro.nome" />
+                        <label for="username">Nome do Veiculo</label>
+                    </span>
+                    <br />
+                    <br />
+                    <span class="p-float-label">
+                        <InputText id="data" type="number" size="20" required v-model="carro.anoFabricacao" />
+                        <label for="username">Ano de Fabricação</label>
+                    </span>
+                    <br />
+                    <br />
+                    <span class="p-float-label">
+                        <InputText id="data" type="number" size="20" required v-model="carro.anoModelo" />
+                        <label for="username">Ano modelo</label>
+                    </span>
+                    <br />
+                    <br />
+                    <span class="p-float-label">
+                        <InputText id="data" type="number" size="20" required v-model="carro.preco" />
+                        <label for="username">Preço</label>
+                    </span>
+                    <br />
+                    <br />
+                    <input type="submit" value="Salvar">
+                    <Toast/>
+
+                </div>
+            </div>
+
 
         </form>
-       
+        <div>
+
+        </div>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from 'axios'
+import InputText from 'primevue/inputtext'
+import Toast from 'primevue/toast';
+
+
+
 
 export default {
-    props:{
+    props: {
 
-},
+    },
     data() {
         return {
             //https://carros-app-example.herokuapp.com/carro
@@ -41,6 +69,7 @@ export default {
                 anoModelo: '',
                 preco: null
             },
+            value: Date.now(),
             mensagem: null
         }
 
@@ -54,7 +83,9 @@ export default {
                 .catch(error => {
                     alert(error)
                     this.$router.push("/carro")
-                })
+                }),
+                this.$toast.add({ severity: 'success', summary: 'Success Message', detail: 'Order submitted', life: 3000 });
+
         }
         console.log(this.$route.params.id);
     },
@@ -62,16 +93,39 @@ export default {
         voltar() {
             this.$router.go(-1)
         },
-        atualizar(carros){
-            const id = carros.id
-            
-            axios.put(`https://carros-app-example.herokuapp.com/carro/${id}`,carros
-            )
-            alert(carros)
+        salvar() {
+            axios.post('https://carros-app-example.herokuapp.com/carro/',
+                this.carro)
+                .then(() => this.mensagem = 'Registro gravado')
+                .catch(error => this.mensagem`Problema na gravação ${error}`)
+
+                this.$toast.add({severity:'success', summary: 'Default Message'})
+
+        },
+        teste() {
+            this.$bvToast.toast(`teste teste`, {
+                title: 'oloco',
+                autoHideDelay: 5000
+            })
         }
-        
+
+    },
+    components: {
+        InputText,
+        Toast
     }
 
 
 }
 </script>
+
+<style scoped>
+
+.first-class{
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%
+}
+
+</style>

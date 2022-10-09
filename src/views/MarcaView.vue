@@ -19,13 +19,15 @@
 
                         <ConfirmDialog @click="messageDialog(m)"></ConfirmDialog>
 
-                        <SplitButton label="Novo" @click="novo()" icon="pi pi-plus" :model="items" href="javascript:void(0)">
+                        <SplitButton label="Novo" @click="novo()" icon="pi pi-plus" :model="items"
+                            href="javascript:void(0)">
                         </SplitButton>
                     </td>
                 </tr>
             </tbody>
+
         </table>
-        <div class="col-lg-12" >
+        <div class="col-lg-12">
             <button type="button" @click="novo()" class="btn btn-outline-primary">Nova marca</button>
         </div>
     </div>
@@ -37,15 +39,22 @@
 import axios from 'axios';
 import SplitButton from 'primevue/splitbutton'
 import ConfirmDialog from 'primevue/confirmdialog';
+import { useToast } from "primevue/usetoast";
+
 
 
 
 
 export default {
+    setup() {
+        const toast = useToast();
+        toast.add({severity:'info', summary: 'Info Message', detail:'Message Content', life: 3000});
+    },
     data() {
         return {
             marcas: [],
             id_marca: 0,
+            
             items: [
                 {
                     label: 'Editar',
@@ -61,6 +70,7 @@ export default {
                     command: () => {
                         this.messageDialog(this.id_marca)
                         this.$toast.add({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
+
                     }
                 },
                 {
@@ -86,6 +96,7 @@ export default {
             }
             this.$router.push(`/Marca-form/${marca.id}`)
 
+
         },
         novo() {
             this.id_marca = null
@@ -97,13 +108,16 @@ export default {
                 .delete(`https://carros-app-example.herokuapp.com/marca/${id}`)
                 .then(this.load())
                 .catch(error => alert(error))
+
+
         },
         load() {
             axios.get('https://carros-app-example.herokuapp.com/marca')
                 .then(resp => {
                     this.marcas = resp.data
                 })
-            window.location.reload();
+
+             window.location.reload();
 
         },
         messageDialog(marca) {
@@ -111,7 +125,7 @@ export default {
                 message: `Você deseja deletar ${marca.nome}?`,
                 header: 'Confirmar exclusão!!!',
                 icon: 'pi pi-exclamation-triangle',
-                acceptLabel:'Sim',
+                acceptLabel: 'Sim',
                 rejectLabel: 'Não',
                 accept: () => {
                     this.excluir(marca)
@@ -146,7 +160,8 @@ export default {
     padding: 10px;
     margin-right: 20px;
 }
-.title-brand{
+
+.title-brand {
     margin-top: 15px;
     margin-bottom: 25px;
 
