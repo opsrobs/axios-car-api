@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Toast />
         <h1 class="title-brand">
             Marcas
         </h1>
@@ -16,15 +17,14 @@
                     <td>{{ m.id }}</td>
                     <td>{{ m.nome }}</td>
                     <td @click="id_marca = m">
-
-                        <ConfirmDialog @click="messageDialog(m)"></ConfirmDialog>
-
                         <SplitButton label="Novo" @click="novo()" icon="pi pi-plus" :model="items"
                             href="javascript:void(0)">
-                            <Toast />
+
                         </SplitButton>
                     </td>
                 </tr>
+                <ConfirmDialog @click="messageDialog(m)"></ConfirmDialog>
+
             </tbody>
 
         </table>
@@ -52,6 +52,7 @@ export default {
         return {
             marcas: [],
             id_marca: 0,
+            opcao: null,
 
             items: [
                 {
@@ -69,13 +70,6 @@ export default {
                         this.messageDialog(this.id_marca)
 
 
-                    }
-                },
-                {
-                    label: 'Vue Website',
-                    icon: 'pi pi-external-link',
-                    command: () => {
-                        window.location.href = 'https://vuejs.org/'
                     }
                 }
             ]
@@ -113,10 +107,15 @@ export default {
                 .then(resp => {
                     this.marcas = resp.data
                 })
-            this.$toast.add({ severity: 'warn', summary: 'Delete', detail: `deletado com sucesso`, life: 30 });
 
             //window.location.reload();
 
+
+        },
+        toastMessage(item) {
+            return this.opcao == 1
+                ? this.$toast.add({ severity: 'warn', summary: 'Delete', detail: item + ' deletado com sucesso!!', life: 3000 })
+                : this.$confirm.close();
 
         },
         messageDialog(marca) {
@@ -128,6 +127,8 @@ export default {
                 rejectLabel: 'Não',
                 accept: () => {
                     this.excluir(marca)
+                    this.opcao = 1
+                    this.toastMessage(marca.nome)
                     this.$confirm.close();
                 },
                 reject: () => {

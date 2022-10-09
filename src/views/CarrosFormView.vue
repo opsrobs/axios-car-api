@@ -97,7 +97,7 @@ export default {
                 this.carro)
                 .then(() => this.mensagem = 'Registro gravado')
                 .catch(error => this.mensagem = `Problema na gravação ${error}`)
-                this.clear()
+                //this.clear()
                 return this.mensagem == 'Registro gravado'
                 ? this.$toast.add({severity:'error', summary: 'Problema na gravação'})
                 : this.$toast.add({severity:'success', summary: 'Registro gravado'})

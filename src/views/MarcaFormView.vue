@@ -53,7 +53,7 @@ export default {
             axios.post('https://carros-app-example.herokuapp.com/marca/',
             this.marca)
             .then(() => this.mensagem = 'Registro gravado')
-            .catch(error => this.mensagem `Problema na gravação ${error}`)
+            .catch(error => this.mensagem = `Problema na gravação ${error}`)
         }
     }
 
