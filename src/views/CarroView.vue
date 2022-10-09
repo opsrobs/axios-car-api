@@ -2,28 +2,35 @@
     <div>
         <h1 class="title-brand">Carros</h1>
 
-        <table>
+        <table class="table">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>Nome</th>
-                <th>Ano Fabricação</th>
-                <th>Ano Modelo</th>
-                <th>Preco</th>
-            </tr>
-            <tr v-for="c in carros" :key="c.id">
-                <td>{{ c.id }}</td>
-                <td>{{ c.nome }}</td>
-                <td>{{ c.anoFabricacao }}</td>
-                <td>{{ c.anoModelo }}</td>
-                <td>{{ c.preco }}</td>
-                <td @click="carro = c">
-                <ConfirmDialog @click="messageDialog(c)"></ConfirmDialog>
-
-                <SplitButton label="Novo" icon="pi pi-plus" :model="items" href="javascript:void(0)">
-                </SplitButton>
-                </td>
+                <th scope="col">Id</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Ano Fabricação</th>
+                <th scope="col">Ano Modelo</th>
+                <th scope="col">Preco</th>
+                <th scope="col">Opção</th>
 
             </tr>
+            </thead>
+            <tbody>
+                <tr v-for="c in carros" :key="c.id">
+                    <td>{{ c.id }}</td>
+                    <td>{{ c.nome }}</td>
+                    <td>{{ c.anoFabricacao }}</td>
+                    <td>{{ c.anoModelo }}</td>
+                    <td>{{ c.preco }}</td>
+                    <td @click="carro = c">
+                    <ConfirmDialog @click="messageDialog(c)"></ConfirmDialog>
+    
+                    <SplitButton label="Novo" icon="pi pi-plus" :model="items" href="javascript:void(0)">
+                    </SplitButton>
+                    </td>
+    
+                </tr>
+
+            </tbody>
         </table>
         
         <div class="col-lg-12" >
