@@ -68,13 +68,6 @@ export default {
                     command: () => {
                         this.messageDialog(this.carro)
                     }
-                },
-                {
-                    label: 'Vue Website',
-                    icon: 'pi pi-external-link',
-                    command: () => {
-                        window.location.href = 'https://vuejs.org/'
-                    }
                 }
             ]
         }
@@ -94,10 +87,9 @@ export default {
             const id = carro.id
 
             axios
-                .delete(`https://carros-app-example.herokuapp.com/carro/555`)
+                .delete(`https://carros-app-example.herokuapp.com/carro/${id}`)
                 .then(this.load())
                 .catch(error => alert(error))
-            // .delete(`https://carros-app-example.herokuapp.com/carro/${id}`)
 
             // .catch(error => this.mensagem = `Problema na gravação ${error}`)
 

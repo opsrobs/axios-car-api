@@ -44,7 +44,7 @@ const routes = [
   },
   {
     path: '/carro-form/',
-    name: 'carro-form',
+    name: 'carro-form-new',
     
     component: () => import('../views/CarrosFormView.vue')
   },

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Toast />
         <h1 class="title-brand">
             Cores
         </h1>
@@ -21,13 +22,12 @@
                     <td class="material-symbols-outlined">{{ ativo(c) }} </td>
 
                     <td @click="cor_id = c">
-
-                        <ConfirmDialog @click="messageDialog(c)"></ConfirmDialog>
-
                         <SplitButton label="Novo" @click="novo()" icon="pi pi-plus" :model="items" href="javascript:void(0)">
                         </SplitButton>
                     </td>
                 </tr>
+                <ConfirmDialog @click="messageDialog(c)"></ConfirmDialog>
+
 
         </table>
         <div class="col-lg-12" >
@@ -39,7 +39,9 @@
 <script>
 import axios from 'axios'
 import SplitButton from 'primevue/splitbutton'
-import ConfirmDialog from 'primevue/confirmdialog';
+import ConfirmDialog from 'primevue/confirmdialog'
+import Toast from 'primevue/toast';
+
 
 export default {
     data() {
@@ -47,13 +49,13 @@ export default {
             //https://carros-app-example.herokuapp.com/carro
             cores: [],
             cor_id:null,
+            opcao:null,
             items: [
                 {
                     label: 'Editar',
                     icon: 'pi pi-refresh',
                     command: () => {
                         this.editar(this.cor_id)
-                        this.$toast.add({ severity: 'success', summary: 'Updated', detail: 'Data Updated', life: 3000 });
                     }
                 },
                 {
@@ -61,14 +63,6 @@ export default {
                     icon: 'pi pi-times',
                     command: () => {
                         this.messageDialog(this.cor_id)
-                        this.$toast.add({ severity: 'warn', summary: 'Delete', detail: 'Data Deleted', life: 3000 });
-                    }
-                },
-                {
-                    label: 'Vue Website',
-                    icon: 'pi pi-external-link',
-                    command: () => {
-                        window.location.href = 'https://vuejs.org/'
                     }
                 }
             ]
@@ -108,7 +102,12 @@ export default {
                 .then(resp => {
                     this.cores = resp.data
                 })
-            window.location.reload();
+
+        },
+        toastMessage(item) {
+            return this.opcao == 1
+                ? this.$toast.add({ severity: 'warn', summary: 'Delete', detail: item + ' deletado com sucesso!!', life: 3000 })
+                : this.$confirm.close();
 
         },
         messageDialog(cor) {
@@ -120,7 +119,9 @@ export default {
                 rejectLabel: 'Não',
                 accept: () => {
                     this.excluir(cor)
+                    this.opcao =1,
                     this.$confirm.close();
+                    this.toastMessage(cor.nome)
                     this.load()
                 },
                 reject: () => {
@@ -137,7 +138,8 @@ export default {
     },
     components: {
         SplitButton,
-        ConfirmDialog
+        ConfirmDialog,
+        Toast
     }
 
 }

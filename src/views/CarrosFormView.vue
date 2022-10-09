@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>
-            x
+           <ha>X</ha>
             <Toast />
         </h1>
     </div>
@@ -9,7 +9,6 @@
         <form @submit.prevent="salvar()">
             <div class="first-class" id="first-id">
                 <div class="p-fluid grid">
-                    <span v-if="mensagem">{{mensagem}}<br /></span>
                     <span class="p-float-label">
                         <InputText id="nome" type="text" size="20" required v-model="carro.nome" />
                         <label for="username">Nome do Veiculo</label>
@@ -34,7 +33,7 @@
                     </span>
                     <br />
                     <br />
-                    <input type="submit" value="Salvar">
+                    <input type="submit" value="Salvar" @click="validadeinsert(mensagem)">
                     <Toast/>
 
                 </div>
@@ -69,7 +68,7 @@ export default {
                 anoModelo: '',
                 preco: null
             },
-            value: Date.now(),
+            value: 0,
             mensagem: null
         }
 
@@ -96,21 +95,17 @@ export default {
             axios.post('https://carros-app-example.herokuapp.com/carro/',
                 this.carro)
                 .then(() => this.mensagem = 'Registro gravado')
-                .catch(error => this.mensagem = `Problema na gravação ${error}`)
-                //this.clear()
-                return this.mensagem == 'Registro gravado'
-                ? this.$toast.add({severity:'error', summary: 'Problema na gravação'})
-                : this.$toast.add({severity:'success', summary: 'Registro gravado'})
-            
-
+                .catch(() => this.value = 1),
+                this.$toast.add({severity:'success', summary: 'Registro gravado', life: 3000})
+                this.clear()
         },
-        // clear(){
-        //     nome='',
-        //     anoFabricacao='',
-        //     anoModelo='',
-        //     preco=''
-
-        // }
+        clear(){
+            this.nome='',
+            this.anoFabricacao='',
+            this.anoModelo='',
+            this.preco='',
+            this.$router.push('/carro-form/')
+        }
 
     },
     components: {
