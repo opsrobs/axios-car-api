@@ -19,7 +19,7 @@
 
                         <ConfirmDialog @click="messageDialog(m)"></ConfirmDialog>
 
-                        <SplitButton label="Novo" icon="pi pi-plus" :model="items" href="javascript:void(0)">
+                        <SplitButton label="Novo" @click="novo()" icon="pi pi-plus" :model="items" href="javascript:void(0)">
                         </SplitButton>
                     </td>
                 </tr>

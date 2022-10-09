@@ -41,8 +41,13 @@ const routes = [
     name: 'carro-form',
     
     component: () => import('../views/CarrosFormView.vue')
-  }
-  ,
+  },
+  {
+    path: '/carro-form/',
+    name: 'carro-form',
+    
+    component: () => import('../views/CarrosFormView.vue')
+  },
   {
     path: '/Cor',
     name: 'Cor',

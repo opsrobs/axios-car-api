@@ -24,7 +24,7 @@
                     <td @click="carro = c">
                     <ConfirmDialog @click="messageDialog(c)"></ConfirmDialog>
     
-                    <SplitButton label="Novo" icon="pi pi-plus" :model="items" href="javascript:void(0)">
+                    <SplitButton label="Novo" @click="novo()" icon="pi pi-plus" :model="items" href="javascript:void(0)">
                     </SplitButton>
                     </td>
     
@@ -94,6 +94,10 @@ export default {
             .delete(`https://carros-app-example.herokuapp.com/carro/${id}`)
             .then(this.load())
             .catch(error => alert(error))
+        },
+        novo() {
+            this.carro = null
+            this.$router.push('/carro-form/')
         },
         load(){
             axios.get()
