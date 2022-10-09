@@ -1,7 +1,8 @@
 <template>
     <div>
         <h1>
-            <ha>X</ha>
+            <ha>Carros</ha>
+            <br/>
             <Toast />
         </h1>
     </div>
@@ -35,12 +36,8 @@
                     <br />
                         <input class="p-button-text zoom" type="submit"
                          value="Salvar">
-                    <Toast />
-
                 </div>
             </div>
-
-
         </form>
         <div>
 
@@ -99,7 +96,7 @@ export default {
                 .then(() => this.mensagem = 'Registro gravado')
                 .catch(() => this.value = 1),
             this.clear(),
-                this.$toast.add({ severity: 'success', summary: 'Registro gravado', life: 3000 })
+                this.$toast.add({ severity: 'success', summary: 'Registro gravado', detail: 'Registro gravados com sucesso', life: 3000 })
         },
         clear() {
             this.nome = '',

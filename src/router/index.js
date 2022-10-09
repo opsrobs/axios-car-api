@@ -55,8 +55,14 @@ const routes = [
     component: () => import('../views/CorView.vue')
   },
   {
-    path: '/cor-form/:id',
+    path: '/Cor-form/:id',
     name: 'cor-form',
+    
+    component: () => import('../views/CorFormView.vue')
+  },
+  {
+    path: '/Cor-form/',
+    name: 'cor-form-NEW',
     
     component: () => import('../views/CorFormView.vue')
   }
